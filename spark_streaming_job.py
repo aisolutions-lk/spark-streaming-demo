@@ -32,7 +32,7 @@ json_df = value_df.withColumn("value", from_json(col("value"), schema))
 final_df = json_df.select(col("value.value").alias("message"))
 
 # Define the output directory for the log files
-output_dir = "/opt/spark-job/logs"
+output_dir = "/opt/spark-streaming-job/logs"
 
 # Write the streaming DataFrame to a log file
 query = final_df \
@@ -40,7 +40,7 @@ query = final_df \
     .outputMode("append") \
     .format("text") \
     .option("path", output_dir) \
-    .option("checkpointLocation", "/opt/spark-job/checkpoints") \
+    .option("checkpointLocation", "/opt/spark-streaming-job/checkpoints") \
     .start()
 
 # Wait for the termination of the query
